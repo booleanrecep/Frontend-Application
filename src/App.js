@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import "./assets/styles.css";
 import logo_icon from "./assets/logo.svg";
 import home_icon from "./assets/home.svg";
+import keine_user from "./assets/default-avatar.jpg";
 import product_icon from "./assets/product.svg";
 
 const mapStateToProps = (state) => {
@@ -24,8 +25,12 @@ function App({ data, config, trl }) {
     type,
     user,
   } = data || {};
-  const { mainColor, logo } = config || {};
-  const [thema, setThema] = React.useState({ mainColor: "", color: "black" });
+  const { mainColor, logo, hasUserSection } = config || {};
+  const [thema, setThema] = React.useState({
+    mainColor: "",
+    color: "black",
+    login: hasUserSection,
+  });
   const [navigate, setNavigate] = React.useState("main");
   const [content, setContent] = React.useState("desc");
   const [atrbcontent, setAtrbontent] = React.useState({
@@ -191,11 +196,38 @@ function App({ data, config, trl }) {
                 </div>
               )}
             </div>
+
             <div className="user-c">
               <div className="user-info">
-                <img alt={user.firstName} src={user.profilePicture} />
-                <p>{user.firstName + " " + user.lastName}</p>
-                <p>{company.name}</p>
+                {thema.login === true ? (
+                  <>
+                    <img
+                      alt={user.firstName}
+                      src={user.profilePicture}
+                      title="Click to log out"
+                      onClick={() =>
+                        setThema((pS) => ({
+                          ...pS,
+                          login: false,
+                        }))
+                      }
+                    />
+                    <p>{user.firstName + " " + user.lastName}</p>
+                    <p>{company.name}</p>
+                  </>
+                ) : (
+                  <img
+                    alt="keine-user"
+                    src={keine_user}
+                    title="Click to log in"
+                    onClick={() =>
+                      setThema((pS) => ({
+                        ...pS,
+                        login: true,
+                      }))
+                    }
+                  />
+                )}
               </div>
               <iframe
                 title="map"

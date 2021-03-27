@@ -126,6 +126,11 @@ body{
 }
 .user-info {
   border: 0.1em solid #007580;
+  height: 20em;
+  flex-grow: 1;
+
+
+
 }
 .user-info > img {
   width: 100%;
@@ -138,7 +143,6 @@ body{
   border-bottom: 0.1em solid #007580;
 }
 #map {
-  /* flex-grow: ; */
   width: 18em;
   height: 19em;
   border: 0.1em solid #007580;
@@ -166,4 +170,8 @@ body{
    width: 100%;
 
  }
+ .user-info {
+  height: 20em;
+
+}
 }
